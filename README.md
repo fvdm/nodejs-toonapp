@@ -21,6 +21,12 @@ toon.setPreset( 1, function( err, data ) {
 ```
 
 
+Installation
+------------
+
+`npm install toonapp`
+
+
 Callback function
 -----------------
 
