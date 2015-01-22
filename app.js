@@ -14,7 +14,7 @@ var user = {}
 var cache = null
 
 // Get version data
-app.version = function( props, cb ) {
+app.version = function( cb ) {
   talk({
     method: 'GET',
     path: '/javascript/version.json',
@@ -150,6 +150,10 @@ function talk( props ) {
     var data = []
     var size = 0
 
+    response.on( 'close', function() {
+      callback( new Error('request dropped') )
+    })
+
     response.on( 'data', function( ch ) {
       data.push( ch )
       size += ch.length
@@ -161,7 +165,7 @@ function talk( props ) {
 
       try {
         data = JSON.parse( data )
-        if( data.success === true || response.statusCode === 200 ) {
+        if( (data.success && data.success === true) || response.statusCode === 200 ) {
           callback( null, data )
           return
         } else {
@@ -176,6 +180,12 @@ function talk( props ) {
       error.code = response.statusCode
       callback( error, null )
     })
+  })
+
+  request.on( 'error', function(e) {
+    var err = new Error('request failed')
+    err.error = e
+    callback( err )
   })
 
   request.end( body )
