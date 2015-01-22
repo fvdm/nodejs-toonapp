@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name":               "Franklin van de Meent",
+    "email":              "fr@nkl.in",
+    "url":                "https://frankl.in"
+  },
+  "name":                  "toonapp",
+  "description":           "Interact with Eneco Toon thermostat",
+  "version":               "0.1.0",
+  "repository": {
+      "type":              "git",
+      "url":               "git://github.com/fvdm/nodejs-toonapp.git"
+  },
+  "bugs": {
+    "url":                 "https://github.com/fvdm/nodejs-toonapp/issues"
+  },
+  "main":                  "app.js",
+  "dependencies":          {},
+  "devDependencies":       {},
+  "optionalDependencies":  {},
+  "engines": {
+    "node":                ">=0.8.0"
+  },
+  "keywords":              ["eneco", "toon", "thermostat", "opentherm", "unlicense"],
+  "license": {
+    "type":                "Public Domain",
+    "url":                 "https://github.com/fvdm/nodejs-toonapp/raw/master/LICENSE"
+  },
+  "scripts": {
+    "test":                "node test.js"
+  }
+}
