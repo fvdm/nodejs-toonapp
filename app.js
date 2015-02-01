@@ -162,7 +162,6 @@ function talk( props ) {
     response.on( 'end', function() {
       var error = null
       data = new Buffer.concat( data, size ).toString().trim()
-
       try {
         data = JSON.parse( data )
         if( (data.success && data.success === true) || response.statusCode === 200 ) {
@@ -172,8 +171,17 @@ function talk( props ) {
           error = new Error('api error')
         }
       } catch(e) {
-        error = new Error('invalid response')
-        error.error = e
+        data = data.replace( /.*-->\s+\{/, '{' );
+        try {
+          data = JSON.parse( data );
+          error = new Error('api error')
+          error.errorCode = data.errorCode;
+          error.reason = data.reason;
+        }
+        catch(e) {
+          error = new Error('invalid response')
+          error.error = e
+        }
       }
 
       error.data = data
