@@ -7,11 +7,11 @@ Feedback:     https://github.com/fvdm/nodejs-toonapp/issues
 License:      Unlicense (Public Domain) -- see LICENSE file
 */
 
-var https = require('https')
-var querystring = require('querystring')
-var app = {}
-var user = {}
-var cache = null
+var https = require('https');
+var querystring = require('querystring');
+var app = {};
+var user = {};
+var cache = null;
 
 // Get version data
 app.version = function (cb) {
@@ -41,12 +41,12 @@ app.setPreset = function (preset, cb) {
       },
       complete: cb
     });
-  };
+  }
 
   if (cache) {
     run ();
   } else {
-    login (function (err, data) {
+    login (function (err) {
       if (err) { cb (err); }
       run ();
     });
@@ -73,7 +73,7 @@ app.setTemperature = function (value, cb) {
   if (cache) {
     run ();
   } else {
-    login (function (err, data) {
+    login (function (err) {
       if (err) { cb (err); }
       run ();
     });
@@ -99,7 +99,7 @@ app.getState = function (cb) {
   if (cache) {
     run ();
   } else {
-    login (function (err, data) {
+    login (function (err) {
       if (err) { cb (err); }
       run ();
     });
@@ -238,7 +238,7 @@ function start (cb) {
 // Build &random= string
 function guidGenerator () {
   var S4 = function () {
-    return parseInt (((1+Math.random ())*0x10000)|0).toString (16).substring (1);
+    return parseInt (((1+Math.random ())*0x10000)).toString (16).substring (1);
   };
   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
