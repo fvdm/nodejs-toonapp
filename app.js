@@ -7,6 +7,11 @@ Feedback:     https://github.com/fvdm/nodejs-toonapp/issues
 License:      Unlicense (Public Domain) -- see LICENSE file
 */
 
+var https = require('https')
+var querystring = require('querystring')
+var app = {}
+var user = {}
+var cache = null
 
 // Get version data
 app.version = function (cb) {
