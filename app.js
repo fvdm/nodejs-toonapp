@@ -7,8 +7,8 @@ Feedback:     https://github.com/fvdm/nodejs-toonapp/issues
 License:      Unlicense (Public Domain) -- see LICENSE file
 */
 
-var https = require('https');
-var querystring = require('querystring');
+var https = require ('https');
+var querystring = require ('querystring');
 var app = {};
 var user = {};
 var cache = null;
@@ -106,12 +106,14 @@ app.getState = function (cb) {
   }
 };
 
+
 // Module
 module.exports = function (setup) {
   user.username = setup.username;
   user.password = setup.password;
   return app;
 };
+
 
 // Communicate
 function talk (props) {
@@ -198,6 +200,7 @@ function talk (props) {
   request.end (body);
 }
 
+
 // Get login session
 function login (cb) {
   talk ({
@@ -218,6 +221,7 @@ function login (cb) {
   });
 }
 
+
 // Start login session
 function start (cb) {
   talk ({
@@ -235,10 +239,11 @@ function start (cb) {
   });
 }
 
+
 // Build &random= string
 function guidGenerator () {
   var S4 = function () {
-    return parseInt (((1+Math.random ())*0x10000)).toString (16).substring (1);
+    return parseInt (((1+Math.random ())*0x10000)) .toString (16) .substring (1);
   };
   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
