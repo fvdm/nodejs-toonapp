@@ -10,7 +10,10 @@ Example
 -------
 
 ```js
-var toon = require('toonapp')('your@email.tld', 'password')
+var toon = require('toonapp')({
+  username: 'your@email.tld',
+  password: 'account password'
+})
 
 // Set preset to Home
 toon.setPreset( 1, function( err, data ) {
