@@ -31,14 +31,14 @@ Installation
 `npm install toonapp`
 
 
-Callback function
------------------
+Methods
+-------
 
 Each method requires a `callback` function to process the response data.
 This function receives two arguments: `err` and `data`.
+When something goes wrong `err` is an _Error_ and `data` is not available.
+When all is good `err` is _null_ and `data` is the parsed response.
 
-* When something goes wrong `err` is an _Error_ and `data` is _null_.
-* When all is good `err` is _null_ and `data` is the parsed response.
 
 ```js
 function callback (err, data) {
@@ -49,21 +49,19 @@ function callback (err, data) {
   }
 }
 ```
- 
-
-Errors
-------
-
-message          | description
------------------|---------------------------------------------------------
-api error        | The API returned an error, see `err.code` and `err.data`
-invalid response | The API response was bad, see `err.code` and `err.data`
-request failed   | The request can not be made
-request dropped  | The request was closed too soon
 
 
-version ( callback )
--------
+#### Errors
+
+message          | description                 | additional
+:----------------|:----------------------------|:--------------------------------
+api error        | The API returned an error   | `err.reason` and `err.errorCode`
+invalid response | The API response was bad    | `err.reason`
+request failed   | The request can not be made | `err.reason`
+
+
+### version
+**( callback )**
 
 Get base version info.
 
@@ -81,41 +79,45 @@ toon.version (console.log);
   minDisplayVersion: 'qb2/ene/2.2.0' }
 ```
 
-setPreset ( preset, callback )
----------
+
+### setPreset
+**( preset, callback )**
 
 Set Toon temperature to a preset.
 
 param    | type     | required | description
----------|----------|----------|-----------------------
-preset   | numeric  | yes      | Preset ID
+:--------|:---------|:---------|:----------------------
+preset   | number   | yes      | Preset ID
 callback | function | yes      | Your callback function
+
 
 ```js
 toon.setPreset (2, callback);
 ```
 
+
 #### Presets
 
 ID | label    | additional
----|----------|------------------
+:--|:---------|:-----------------
 0  | Comfort  | See `getState() .thermostatStates`
-1  | Thuis    | ""
-2  | Slapen   | ""
-3  | Weg      | ""
+1  | Thuis    | " "
+2  | Slapen   | " "
+3  | Weg      | " "
 4  | Vacation | Disables schedule
 5  | -        | unknown
 
 
-setTemperature ( value, callback )
---------------
+### setTemperature
+**( value, callback )**
 
 Set manual temperature, overriding scheduled preset until next program starts.
 
 param    | type     | required | description
----------|----------|----------|-------------------------------------------
-value    | numeric  | yes      | Celcius * 100, i.e. set `1845` for 18.45 C
+:--------|:---------|:---------|:------------------------------------------
+value    | number   | yes      | Celcius * 100, i.e. set `1845` for 18.45 C
 callback | function | yes      | Your callback function
+
 
 ```js
 // 19.48 C, displayed as 19.5 on Toon
@@ -123,14 +125,15 @@ toon.setTemperature (1948, callback);
 ```
 
 
-getState ( callback )
---------
+### getState
+**( callback )**
 
 Get current status information, statistics, readings, etc.
 
 param    | type     | required | description
----------|----------|----------|-----------------------
+:--------|:---------|:---------|:----------------------
 callback | function | yes      | Your callback function
+
 
 ```js
 toon.getState (function (err, data) {
@@ -144,8 +147,9 @@ toon.getState (function (err, data) {
 
 #### Short example
 
-Sometimes you get only a short response like below.
-Most times the list is huge.
+Sometimes you get only a short response like below, the output can vary a lot.
+Most times the list is huge and for example `thermostatInfo` can be missing.
+
 
 ```js
 { success: true,
