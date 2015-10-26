@@ -10,17 +10,18 @@ Example
 -------
 
 ```js
-var toon = require('toonapp')({
+var toon = require ('toonapp') ({
   username: 'your@email.tld',
   password: 'account password'
-})
+});
 
 // Set preset to Home
-toon.setPreset( 1, function( err, data ) {
-  if( err ) { return console.log(err) }
+toon.setPreset (1, function (err, data) {
+  if (err) { return console.log (err); }
+
   // OK, now get full status
-  toon.getState( console.log )
-})
+  toon.getState (console.log);
+});
 ```
 
 
@@ -40,9 +41,9 @@ This function receives two arguments: `err` and `data`.
 * When all is good `err` is _null_ and `data` is the parsed response.
 
 ```js
-function callback( err, data ) {
-  if( err ) {
-    console.log( err )
+function callback (err, data) {
+  if (err) {
+    console.log (err);
   } else {
     // process data
   }
@@ -71,7 +72,7 @@ param    | type     | required | description
 callback | function | yes      | Your callback function
 
 ```js
-toon.version( console.log )
+toon.version (console.log);
 ```
 
 ```js
@@ -91,7 +92,7 @@ preset   | numeric  | yes      | Preset ID
 callback | function | yes      | Your callback function
 
 ```js
-toon.setPreset( 2, callback )
+toon.setPreset (2, callback);
 ```
 
 #### Presets
@@ -118,7 +119,7 @@ callback | function | yes      | Your callback function
 
 ```js
 // 19.48 C, displayed as 19.5 on Toon
-toon.setTemperature( 1948, callback )
+toon.setTemperature (1948, callback);
 ```
 
 
@@ -132,13 +133,13 @@ param    | type     | required | description
 callback | function | yes      | Your callback function
 
 ```js
-toon.getState( function( err, data ) {
-  if( err ) { return console.log( err ) }
+toon.getState (function (err, data) {
+  if (err) { return console.log (err); }
   // Current Watt/h from smart meter
-  if( data.powerUsage ) {
-    console.log( data.powerUsage.value )
+  if (data.powerUsage) {
+    console.log (data.powerUsage.value);
   }
-})
+});
 ```
 
 #### Short example
