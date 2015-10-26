@@ -10,6 +10,7 @@ Example
 -------
 
 ```js
+// Set your Eneco account details
 var toon = require ('toonapp') ({
   username: 'your@email.tld',
   password: 'account password'
