@@ -22,8 +22,5 @@
     "node":                ">=0.8.0"
   },
   "keywords":              ["eneco", "toon", "thermostat", "opentherm", "unlicense"],
-  "license": {
-    "type":                "Public Domain",
-    "url":                 "https://github.com/fvdm/nodejs-toonapp/raw/master/LICENSE"
-  }
+  "license":               "Unlicense"
 }
