@@ -1,8 +1,8 @@
 {
   "author": {
-    "name":               "Franklin van de Meent",
-    "email":              "fr@nkl.in",
-    "url":                "https://frankl.in"
+    "name":                "Franklin van de Meent",
+    "email":               "fr@nkl.in",
+    "url":                 "https://frankl.in"
   },
   "name":                  "toonapp",
   "description":           "Interact with Eneco Toon thermostat",
