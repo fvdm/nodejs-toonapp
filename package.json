@@ -15,7 +15,9 @@
     "url":                 "https://github.com/fvdm/nodejs-toonapp/issues"
   },
   "main":                  "app.js",
-  "dependencies":          {},
+  "dependencies": {
+    "httpreq":             "0.4.x"
+  },
   "devDependencies":       {},
   "optionalDependencies":  {},
   "engines": {
