@@ -190,7 +190,7 @@ function talk (props) {
 
     error.data = data;
     error.code = res && res.statusCode;
-    callback (error, null);
+    callback (error);
   });
 }
 
