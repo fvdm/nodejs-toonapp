@@ -19,6 +19,13 @@ var cache = null;
 // 3a. on success -> talk ()
 // 3b. on error -> log
 function talk (props) {
+  var options = {
+    method: props.method || 'GET',
+    url: 'https://toonopafstand.eneco.nl'+ props.path,
+    parameters: props.query || {},
+    headers: props.headers || {}
+  };
+
   function callback (err, res) {
     if (typeof props.complete === 'function') {
       props.complete (err, res);
@@ -36,13 +43,6 @@ function talk (props) {
     });
     return;
   }
-
-  var options = {
-    method: props.method || 'GET',
-    url: 'https://toonopafstand.eneco.nl'+ props.path,
-    parameters: props.query || {},
-    headers: props.headers || {}
-  };
 
   options.parameters._ = Date.now ();
   options.headers.Referer = 'https://toonopafstand.eneco.nl/index.html';
