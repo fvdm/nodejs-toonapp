@@ -33,7 +33,7 @@ function talk (props) {
   }
 
   if (!cache && !props.noLogin) {
-    sessionStart (function (err, res) {
+    sessionStart (function (err) {
       if (err) {
         callback (err);
         return;
@@ -132,7 +132,7 @@ function sessionLogin (callback) {
 // i.e. app + nodejs = 2
 function sessionStart (callback) {
   if (!cache) {
-    sessionLogin (function (err, res) {
+    sessionLogin (function (err) {
       if (err) {
         callback && callback (err);
         return;
