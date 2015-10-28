@@ -13,65 +13,6 @@ var user = {};
 var cache = null;
 
 
-// Get login session
-// Trades username/password for clientId
-function sessionLogin (callback) {
-  talk ({
-    method: 'POST',
-    path: '/toonMobileBackendWeb/client/login',
-    noLogin: true,
-    query: {
-      username: user.username,
-      password: user.password
-    },
-    headers: {
-      Referer: 'https://toonopafstand.eneco.nl/index.html'
-    },
-    complete: function (err, data) {
-      if (err) {
-        callback && callback (err);
-        return;
-      }
-
-      cache = data;
-      callback && callback (null, data);
-    }
-  });
-}
-
-
-// Start remote session
-// max 4 simultaneous sessions per account!
-// i.e. app + nodejs = 2
-function sessionStart (callback) {
-  if (!cache) {
-    sessionLogin (function (err, res) {
-      if (err) {
-        callback && callback (err);
-        return;
-      }
-
-      sessionStart (callback);
-    });
-    return;
-  }
-
-  talk ({
-    method: 'GET',
-    path: '/toonMobileBackendWeb/client/auth/start',
-    noLogin: true,
-    query: {
-      clientId: cache.clientId,
-      clientIdChecksum: cache.clientIdChecksum,
-      agreementId: cache.agreements [0] .agreementId,
-      agreementIdChecksum: cache.agreements [0] .agreementIdChecksum,
-      random: guidGenerator ()
-    },
-    complete: callback
-  });
-}
-
-
 // Communicate
 // 1. Check clientId
 // 2. No clientId -> start () (-> login ())
@@ -145,6 +86,65 @@ function talk (props) {
     error.data = data;
     error.code = res && res.statusCode;
     callback (error);
+  });
+}
+
+
+// Get login session
+// Trades username/password for clientId
+function sessionLogin (callback) {
+  talk ({
+    method: 'POST',
+    path: '/toonMobileBackendWeb/client/login',
+    noLogin: true,
+    query: {
+      username: user.username,
+      password: user.password
+    },
+    headers: {
+      Referer: 'https://toonopafstand.eneco.nl/index.html'
+    },
+    complete: function (err, data) {
+      if (err) {
+        callback && callback (err);
+        return;
+      }
+
+      cache = data;
+      callback && callback (null, data);
+    }
+  });
+}
+
+
+// Start remote session
+// max 4 simultaneous sessions per account!
+// i.e. app + nodejs = 2
+function sessionStart (callback) {
+  if (!cache) {
+    sessionLogin (function (err, res) {
+      if (err) {
+        callback && callback (err);
+        return;
+      }
+
+      sessionStart (callback);
+    });
+    return;
+  }
+
+  talk ({
+    method: 'GET',
+    path: '/toonMobileBackendWeb/client/auth/start',
+    noLogin: true,
+    query: {
+      clientId: cache.clientId,
+      clientIdChecksum: cache.clientIdChecksum,
+      agreementId: cache.agreements [0] .agreementId,
+      agreementIdChecksum: cache.agreements [0] .agreementIdChecksum,
+      random: guidGenerator ()
+    },
+    complete: callback
   });
 }
 
