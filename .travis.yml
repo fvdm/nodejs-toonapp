@@ -6,8 +6,3 @@ node_js:
  - "0.12"
  - "0.10"
  - "0.8"
-script:
- - nvm install 4.2 && npm -g install eslint
-matrix:
- exclude:
-  - node_js: script
