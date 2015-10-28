@@ -21,7 +21,7 @@ var cache = null;
 function talk (props) {
   var options = {
     method: props.method || 'GET',
-    url: 'https://toonopafstand.eneco.nl'+ props.path,
+    url: 'https://toonopafstand.eneco.nl' + props.path,
     parameters: props.query || {},
     headers: props.headers || {}
   };
