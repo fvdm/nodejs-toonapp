@@ -6,9 +6,9 @@ install:
  - nvm install 0.12
  - nvm install 0.10
  - nvm install 0.8
- - nvm exec 4.2 npm -g install eslint
+ - nvm use 4.2; npm -g install eslint
 script:
- - nvm exec 4.2 eslint .
+ - nvm use 4.2; eslint .
  - nvm use 4.2 && rm -rf node_modules && npm install
  - nvm use 4.0 && rm -rf node_modules && npm install
  - nvm use 0.12 && rm -rf node_modules && npm install
