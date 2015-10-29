@@ -111,9 +111,6 @@ function sessionLogin (callback) {
       username: user.username,
       password: user.password
     },
-    headers: {
-      Referer: 'https://toonopafstand.eneco.nl/index.html'
-    },
     complete: function (err, data) {
       if (err) {
         callback && callback (err);
