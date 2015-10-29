@@ -141,7 +141,6 @@ function sessionStart (callback) {
   }
 
   talk ({
-    method: 'GET',
     path: '/toonMobileBackendWeb/client/auth/start',
     noLogin: true,
     query: {
