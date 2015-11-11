@@ -92,11 +92,19 @@ function talk (props) {
 
 // Build &random= string
 function guidGenerator () {
-  var S4 = function () {
-    return parseInt (((Math.random () + 1) * 0x10000), 10) .toString (16) .substring (1);
+  function S4 (times, prefix) {
+    var str = '';
+    var i;
+
+    for (i = times || 1; i > 0; i--) {
+      str += String (prefix);
+      str += parseInt (((Math.random () + 1) * 0x10000), 10) .toString (16) .substring (1);
+    }
+
+    return str;
   };
 
-  return (S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4());
+  return (S4(2) + S4(4, '-') + S4(2));
 }
 
 
