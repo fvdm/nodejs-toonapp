@@ -11,6 +11,25 @@ var http = require ('httpreq');
 var app = {};
 var user = {};
 var cache = null;
+var sessionStart;
+
+
+// Build &random= string
+function guidGenerator () {
+  function S4 (times, prefix) {
+    var str = '';
+    var i;
+
+    for (i = times || 1; i > 0; i--) {
+      str += String (prefix);
+      str += parseInt (((Math.random () + 1) * 0x10000), 10) .toString (16) .substring (1);
+    }
+
+    return str;
+  }
+
+  return (S4(2) + S4(4, '-') + S4(2));
+}
 
 
 // Communicate
@@ -90,24 +109,6 @@ function talk (props) {
 }
 
 
-// Build &random= string
-function guidGenerator () {
-  function S4 (times, prefix) {
-    var str = '';
-    var i;
-
-    for (i = times || 1; i > 0; i--) {
-      str += String (prefix);
-      str += parseInt (((Math.random () + 1) * 0x10000), 10) .toString (16) .substring (1);
-    }
-
-    return str;
-  }
-
-  return (S4(2) + S4(4, '-') + S4(2));
-}
-
-
 // Get login session
 // Trades username/password for clientId
 function sessionLogin (callback) {
@@ -135,7 +136,7 @@ function sessionLogin (callback) {
 // Start remote session
 // max 4 simultaneous sessions per account!
 // i.e. app + nodejs = 2
-function sessionStart (callback) {
+sessionStart = function (callback) {
   if (!cache) {
     sessionLogin (function (err) {
       if (err) {
@@ -160,7 +161,7 @@ function sessionStart (callback) {
     },
     complete: callback
   });
-}
+};
 
 
 // Get version data
