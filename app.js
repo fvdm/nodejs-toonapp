@@ -67,7 +67,8 @@ function talk (props) {
     method: props.method || 'GET',
     url: config.endpoint + props.path,
     parameters: props.query || {},
-    headers: props.headers || {}
+    headers: props.headers || {},
+    timeout: props.timeout || config.timeout || 5000
   };
 
   function callback (err, res) {
@@ -295,6 +296,7 @@ app.getState = function (cb) {
 module.exports = function (setup) {
   config.username = setup.username;
   config.password = setup.password;
+  config.timeout = setup.timeout || 5000;
   config.endpoint = setup.endpoint || 'https://toonopafstand.eneco.nl';
   return app;
 };
