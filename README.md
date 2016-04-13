@@ -3,7 +3,7 @@ toonapp
 
 Unofficial node.js module to interact with Eneco Toon thermostat.
 
-[![Codeship Status for fvdm/nodejs-toonapp](https://codeship.com/projects/8f7785f0-5f8c-0133-bbdb-369bf6f97780/status?branch=master)](https://codeship.com/projects/111826)
+[![Build Status](https://travis-ci.org/fvdm/nodejs-toonapp.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-toonapp)
 
 _Notice: this is not using the new official API, but instead the same endpoints as the iPhone app._
 
