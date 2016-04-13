@@ -65,7 +65,7 @@ function guidGenerator () {
 function talk (props) {
   var options = {
     method: props.method || 'GET',
-    url: 'https://toonopafstand.eneco.nl' + props.path,
+    url: config.endpoint + props.path,
     parameters: props.query || {},
     headers: props.headers || {}
   };
@@ -295,5 +295,6 @@ app.getState = function (cb) {
 module.exports = function (setup) {
   config.username = setup.username;
   config.password = setup.password;
+  config.endpoint = setup.endpoint || 'https://toonopafstand.eneco.nl';
   return app;
 };
