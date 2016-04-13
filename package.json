@@ -15,10 +15,15 @@
     "url": "https://github.com/fvdm/nodejs-toonapp/issues"
   },
   "main": "app.js",
+  "scripts": {
+    "test": "eslint ."
+  },
   "dependencies": {
     "httpreq": "^0.4.16"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^2.5.1"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": ">=0.8.0"
