@@ -14,7 +14,12 @@ var cache = null;
 var sessionStart;
 
 
-// Build &random= string
+/**
+ * Build &random= string
+ *
+ * @returns {string} - GUID hash
+ */
+
 function guidGenerator () {
   function S4 (times, prefix) {
     var str = '';
@@ -32,11 +37,25 @@ function guidGenerator () {
 }
 
 
-// Communicate
-// 1. Check clientId
-// 2. No clientId -> start () (-> login ())
-// 3a. on success -> talk ()
-// 3b. on error -> log
+/**
+ * Communicate with device
+ *
+ * 1. Check clientId
+ * 2. No clientId -> start () (-> login ())
+ * 3a. on success -> talk ()
+ * 3b. on error -> log
+ *
+ * @callback props.complete
+ * @param props {object} - Request options
+ * @param [props.method] {string=GET} - HTTP method
+ * @param [props.query] {object} - Request parameters
+ * @param [props.headers] {object} - Request headers
+ * @param [props.complete] {function} - Callback `function (err, data) {}`
+ * @param [props.noLogin] {boolean=true} - Skip auto login
+ * @Param [props.timeout] {number=5000} - Request timeout in ms
+ * @returns {void}
+ */
+
 function talk (props) {
   var options = {
     method: props.method || 'GET',
@@ -109,8 +128,15 @@ function talk (props) {
 }
 
 
-// Get login session
-// Trades username/password for clientId
+/**
+ * Get login session
+ * Trades username/password for clientId
+ *
+ * @callback callback
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 function sessionLogin (callback) {
   talk ({
     method: 'POST',
@@ -133,9 +159,16 @@ function sessionLogin (callback) {
 }
 
 
-// Start remote session
-// max 4 simultaneous sessions per account!
-// i.e. app + nodejs = 2
+/**
+ * Start remote session
+ * max 4 simultaneous sessions per account!
+ * i.e. app + nodejs = 2
+ *
+ * @callback callback
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 sessionStart = function (callback) {
   if (!cache) {
     sessionLogin (function (err) {
@@ -164,7 +197,14 @@ sessionStart = function (callback) {
 };
 
 
-// Get version data
+/**
+ * Get version data
+ *
+ * @callback cb
+ * @param cb {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 app.version = function (cb) {
   talk ({
     path: '/javascript/version.json',
@@ -173,7 +213,16 @@ app.version = function (cb) {
   });
 };
 
-// Set temperature preset
+
+/**
+ * Set temperature preset
+ *
+ * @callback cb
+ * @param preset {number} - Preset ID
+ * @param cb {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 app.setPreset = function (preset, cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/schemeState',
@@ -186,8 +235,17 @@ app.setPreset = function (preset, cb) {
   });
 };
 
-// Set manual temp, value = Celcius * 100
-// i.e. 1847 = 18.47C = 18.5 display
+
+/**
+ * Set manual temp
+ * i.e. 1847 = 18.47C = 18.5 display
+ *
+ * @callback cb
+ * @param value {number} - Degrees Celcius * 100
+ * @param cb {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 app.setTemperature = function (value, cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/setPoint',
@@ -199,7 +257,15 @@ app.setTemperature = function (value, cb) {
   });
 };
 
-// Get everything
+
+/**
+ * Get everything
+ *
+ * @callback cb
+ * @param cb {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
 app.getState = function (cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/retrieveToonState',
@@ -211,7 +277,15 @@ app.getState = function (cb) {
 };
 
 
-// Module
+/**
+ * Module
+ *
+ * @param setup {object} - Configuration
+ * @param setup.username {string} - Eneco account username
+ * @param setup.password {string} - Eneco account password
+ * @returns app {object}
+ */
+
 module.exports = function (setup) {
   user.username = setup.username;
   user.password = setup.password;
