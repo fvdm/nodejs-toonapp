@@ -8,9 +8,9 @@ License:      Unlicense (Public Domain) - see LICENSE file
 */
 
 var http = require ('httpreq');
+var sessionStart;
 var app = {};
 var cache = null;
-var sessionStart;
 
 var config = {
   username: null,
@@ -298,5 +298,6 @@ module.exports = function (setup) {
   config.password = setup.password;
   config.timeout = setup.timeout || 5000;
   config.endpoint = setup.endpoint || 'https://toonopafstand.eneco.nl';
+
   return app;
 };
