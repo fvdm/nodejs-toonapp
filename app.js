@@ -9,9 +9,15 @@ License:      Unlicense (Public Domain) - see LICENSE file
 
 var http = require ('httpreq');
 var app = {};
-var user = {};
 var cache = null;
 var sessionStart;
+
+var config = {
+  username: null,
+  password: null,
+  timeout: null,
+  endpoint: null
+};
 
 
 /**
@@ -143,8 +149,8 @@ function sessionLogin (callback) {
     path: '/toonMobileBackendWeb/client/login',
     noLogin: true,
     query: {
-      username: user.username,
-      password: user.password
+      username: config.username,
+      password: config.password
     },
     complete: function (err, data) {
       if (err) {
@@ -287,7 +293,7 @@ app.getState = function (cb) {
  */
 
 module.exports = function (setup) {
-  user.username = setup.username;
-  user.password = setup.password;
+  config.username = setup.username;
+  config.password = setup.password;
   return app;
 };
