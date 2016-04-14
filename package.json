@@ -36,16 +36,5 @@
     "opentherm",
     "unlicense"
   ],
-  "license": "Unlicense",
-  "contributors": [
-    {
-      "name": "Franklin van de Meent",
-      "email": "fr@nkl.in",
-      "url": "https://github.com/fvdm",
-      "contributions": 47,
-      "additions": 1231,
-      "deletions": 589,
-      "hireable": true
-    }
-  ]
+  "license": "Unlicense"
 }
