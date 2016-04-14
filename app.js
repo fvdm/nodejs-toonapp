@@ -115,6 +115,10 @@ function talk (props) {
     } catch (e) {
       error = new Error ('invalid response');
       error.reason = e;
+      error.data = data;
+      error.code = res.statusCode;
+      callback (error);
+      return;
     }
 
     if ((data.success && data.success === true) || res.statusCode === 200) {
