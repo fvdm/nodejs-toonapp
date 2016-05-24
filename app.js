@@ -221,7 +221,7 @@ sessionStart = function (callback) {
     },
     complete: callback
   });
-}
+};
 
 
 /**
