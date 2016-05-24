@@ -9,7 +9,6 @@ License:      Unlicense (Public Domain) - see LICENSE file
 
 var http = require ('httpreq');
 var sessionStart;
-var app = {};
 var cache = null;
 
 var config = {
@@ -197,7 +196,7 @@ function sessionLogin (callback) {
  * @returns {void}
  */
 
-function sessionStart (callback) {
+sessionStart = function (callback) {
   if (!cache) {
     sessionLogin (function (err) {
       if (err) {
@@ -222,7 +221,7 @@ function sessionStart (callback) {
     },
     complete: callback
   });
-};
+}
 
 
 /**
@@ -239,7 +238,7 @@ function methodVersion (cb) {
     noLogin: true,
     complete: cb
   });
-};
+}
 
 
 /**
@@ -261,7 +260,7 @@ function methodSetPreset (preset, cb) {
     },
     complete: cb
   });
-};
+}
 
 
 /**
@@ -283,7 +282,7 @@ function methodSetTemperature (value, cb) {
     },
     complete: cb
   });
-};
+}
 
 
 /**
@@ -302,7 +301,7 @@ function methodGetState (cb) {
     },
     complete: cb
   });
-};
+}
 
 
 /**
