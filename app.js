@@ -15,8 +15,8 @@ var cache = null;
 var config = {
   username: null,
   password: null,
-  timeout: null,
-  endpoint: null
+  timeout: 5000,
+  endpoint: 'https://toonopafstand.eneco.nl'
 };
 
 
@@ -40,6 +40,57 @@ function guidGenerator () {
   }
 
   return (S4(2) + S4(4, '-') + S4(2));
+}
+
+
+/**
+ * Process response
+ *
+ * @callback callback
+ * @param err {Error, null} - Request error
+ * @param res {object} - Response details
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function processResponse (err, res, callback) {
+  var data = res && res.body || '';
+  var error = null;
+
+  if (err) {
+    error = new Error ('request failed');
+    error.reason = err;
+    callback (error);
+    return;
+  }
+
+  data = data.replace (/<!--.*-->/, '');
+
+  try {
+    data = JSON.parse (data);
+  } catch (e) {
+    error = new Error ('invalid response');
+    error.reason = e;
+    error.data = data;
+    error.code = res.statusCode;
+    callback (error);
+    return;
+  }
+
+  if ((data.success && data.success === true) || res.statusCode === 200) {
+    callback (null, data);
+    return;
+  }
+
+  if (data.errorCode || data.reason) {
+    error = new Error ('api error');
+    error.errorCode = data.errorCode;
+    error.reason = data.reason;
+  }
+
+  error.data = data;
+  error.code = res && res.statusCode;
+  callback (error);
 }
 
 
@@ -97,45 +148,11 @@ function talk (props) {
     options.parameters.clientIdChecksum = cache.clientIdChecksum;
   }
 
-  http.doRequest (options, function (err, res) {
-    var data = res && res.body || '';
-    var error = null;
+  function httpResponse (err, res) {
+    processResponse (err, res, callback);
+  }
 
-    if (err) {
-      error = new Error ('request failed');
-      error.reason = err;
-      callback (error);
-      return;
-    }
-
-    data = data.replace (/<!--.*-->/, '');
-
-    try {
-      data = JSON.parse (data);
-    } catch (e) {
-      error = new Error ('invalid response');
-      error.reason = e;
-      error.data = data;
-      error.code = res.statusCode;
-      callback (error);
-      return;
-    }
-
-    if ((data.success && data.success === true) || res.statusCode === 200) {
-      callback (null, data);
-      return;
-    }
-
-    if (data.errorCode || data.reason) {
-      error = new Error ('api error');
-      error.errorCode = data.errorCode;
-      error.reason = data.reason;
-    }
-
-    error.data = data;
-    error.code = res && res.statusCode;
-    callback (error);
-  });
+  http.doRequest (options, httpResponse);
 }
 
 
@@ -180,7 +197,7 @@ function sessionLogin (callback) {
  * @returns {void}
  */
 
-sessionStart = function (callback) {
+function sessionStart (callback) {
   if (!cache) {
     sessionLogin (function (err) {
       if (err) {
@@ -216,7 +233,7 @@ sessionStart = function (callback) {
  * @returns {void}
  */
 
-app.version = function (cb) {
+function methodVersion (cb) {
   talk ({
     path: '/javascript/version.json',
     noLogin: true,
@@ -234,7 +251,7 @@ app.version = function (cb) {
  * @returns {void}
  */
 
-app.setPreset = function (preset, cb) {
+function methodSetPreset (preset, cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/schemeState',
     query: {
@@ -257,7 +274,7 @@ app.setPreset = function (preset, cb) {
  * @returns {void}
  */
 
-app.setTemperature = function (value, cb) {
+function methodSetTemperature (value, cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/setPoint',
     query: {
@@ -277,7 +294,7 @@ app.setTemperature = function (value, cb) {
  * @returns {void}
  */
 
-app.getState = function (cb) {
+function methodGetState (cb) {
   talk ({
     path: '/toonMobileBackendWeb/client/auth/retrieveToonState',
     query: {
@@ -294,14 +311,21 @@ app.getState = function (cb) {
  * @param setup {object} - Configuration
  * @param setup.username {string} - Eneco account username
  * @param setup.password {string} - Eneco account password
+ * @param [setup.timeout = 5000] {number} - Request timeout in ms
+ * @param [setup.endpoint] {string} - API endpoint to use
  * @returns app {object}
  */
 
 module.exports = function (setup) {
   config.username = setup.username;
   config.password = setup.password;
-  config.timeout = setup.timeout || 5000;
+  config.timeout = setup.timeout || config.timeout;
   config.endpoint = setup.endpoint || 'https://toonopafstand.eneco.nl';
 
-  return app;
+  return {
+    version: methodVersion,
+    setPreset: methodSetPreset,
+    setTemperature: methodSetTemperature,
+    getState: methodGetState
+  };
 };
