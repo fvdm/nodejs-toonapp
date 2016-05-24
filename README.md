@@ -21,7 +21,10 @@ var toon = require ('toonapp') ({
 
 // Set preset to Home
 toon.setPreset (1, function (err, data) {
-  if (err) { return console.log (err); }
+  if (err) {
+    console.log (err);
+    return;
+  }
 
   // OK, now get full status
   toon.getState (console.log);
@@ -64,13 +67,14 @@ invalid response | The API response was bad    | `err.reason`
 request failed   | The request can not be made | `err.reason`
 
 
-### version
+version
+-------
 **( callback )**
 
 Get base version info.
 
 param    | type     | required | description
----------|----------|----------|-----------------------
+:--------|:---------|:---------|:----------------------
 callback | function | yes      | Your callback function
 
 ```js
@@ -84,7 +88,8 @@ toon.version (console.log);
 ```
 
 
-### setPreset
+setPreset
+---------
 **( preset, callback )**
 
 Set Toon temperature to a preset.
@@ -112,7 +117,8 @@ ID | label    | additional
 5  | -        | unknown
 
 
-### setTemperature
+setTemperature
+--------------
 **( value, callback )**
 
 Set manual temperature, overriding scheduled preset until next program starts.
@@ -129,7 +135,8 @@ toon.setTemperature (1948, callback);
 ```
 
 
-### getState
+getState
+--------
 **( callback )**
 
 Get current status information, statistics, readings, etc.
@@ -217,6 +224,4 @@ For more information, please refer to <http://unlicense.org>
 Author
 ------
 
-Franklin van de Meent
-| [Website](https://frankl.in)
-| [Github](https://github.com/fvdm)
+[Franklin van de Meent](https://frankl.in)
