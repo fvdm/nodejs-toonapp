@@ -2,10 +2,10 @@ var dotest = require ('dotest');
 var app = require ('./');
 
 var config = {
-  username: process.env.TOONAPP_USERNAME || null,
-  password: process.env.TOONAPP_PASSWORD || null,
-  timeout: process.env.TOONAPP_TIMEOUT || 5000,
-  endpoint: process.env.TOONAPP_ENDPOINT || null
+  username: process.env.TOONAPP_USERNAME,
+  password: process.env.TOONAPP_PASSWORD,
+  timeout: process.env.TOONAPP_TIMEOUT,
+  endpoint: process.env.TOONAPP_ENDPOINT
 };
 
 var toon = app (config);
