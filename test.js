@@ -81,7 +81,7 @@ dotest.add ('Method .getState', function (test) {
       .isObject ('fail', 'data.thermostatInfo', data && data.thermostatInfo)
       .isObject ('fail', 'data.thermostatStates', tState)
       .isArray ('fail', 'data.thermostatStates.state', tState && tState.state)
-      .isObject ('fail', 'data.thermostatStates.stats[0]', tItem)
+      .isObject ('fail', 'data.thermostatStates.state[0]', tItem)
       .done ();
   });
 });
