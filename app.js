@@ -199,6 +199,8 @@ function sessionLogin (callback) {
  */
 
 sessionStart = function (callback) {
+  var agreement = cache.agreements && cache.agreements [0];
+
   if (!cache) {
     sessionLogin (function (err) {
       if (err) {
@@ -210,8 +212,6 @@ sessionStart = function (callback) {
     });
     return;
   }
-
-  var agreement = cache.agreements && cache.agreements [0];
 
   talk ({
     path: '/toonMobileBackendWeb/client/auth/start',
