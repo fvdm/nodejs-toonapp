@@ -18,6 +18,7 @@
   "scripts": {
     "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
   },
+  "tonicExampleFilename": "example.js",
   "dependencies": {
     "httpreq": "^0.4.22"
   },
