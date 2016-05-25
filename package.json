@@ -15,6 +15,9 @@
     "url": "https://github.com/fvdm/nodejs-toonapp/issues"
   },
   "main": "app.js",
+  "files": [
+    "example.js"
+  ],
   "scripts": {
     "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
   },
