@@ -9,7 +9,7 @@ License:      Unlicense (Public Domain) - see LICENSE file
 
 var http = require ('httpreq');
 var sessionStart;
-var cache = null;
+var cache = {};
 
 var config = {
   username: null,
@@ -41,6 +41,11 @@ function guidGenerator () {
   }
 
   return (S4 (2) + S4 (4, '-') + S4 (2));
+}
+
+
+function haveCache () {
+  return Object.keys (cache).length;
 }
 
 
@@ -129,7 +134,7 @@ function talk (props) {
     }
   }
 
-  if (!cache && !props.noLogin) {
+  if (!haveCache () && !props.noLogin) {
     sessionStart (function (err) {
       if (err) {
         callback (err);
@@ -144,7 +149,7 @@ function talk (props) {
   options.parameters._ = Date.now ();
   options.headers.Referer = 'https://toonopafstand.eneco.nl/index.html';
 
-  if (cache) {
+  if (haveCache ()) {
     options.parameters.clientId = cache.clientId;
     options.parameters.clientIdChecksum = cache.clientIdChecksum;
   }
@@ -201,7 +206,7 @@ function sessionLogin (callback) {
 sessionStart = function (callback) {
   var agreement = cache.agreements && cache.agreements [0];
 
-  if (!cache) {
+  if (!haveCache ()) {
     sessionLogin (function (err) {
       if (err) {
         callback && callback (err);
