@@ -16,6 +16,7 @@ dotest.add ('Module', function (test) {
   test ()
     .isFunction ('fail', 'exports', app)
     .isObject ('fail', 'interface', toon)
+    .isNotEmpty ('fail', 'interface', toon)
     .isFunction ('fail', '.version', toon && toon.version)
     .isFunction ('fail', '.setPreset', toon && toon.setPreset)
     .isFunction ('fail', '.setTemperature', toon && toon.setTemperature)
