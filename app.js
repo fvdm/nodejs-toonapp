@@ -209,14 +209,16 @@ sessionStart = function (callback) {
     return;
   }
 
+  var agreement = cache.agreements && cache.agreements [0];
+
   talk ({
     path: '/toonMobileBackendWeb/client/auth/start',
     noLogin: true,
     query: {
       clientId: cache.clientId,
       clientIdChecksum: cache.clientIdChecksum,
-      agreementId: cache.agreements [0] .agreementId,
-      agreementIdChecksum: cache.agreements [0] .agreementIdChecksum,
+      agreementId: agreement && agreement.agreementId,
+      agreementIdChecksum: agreement && agreement.agreementIdChecksum,
       random: guidGenerator ()
     },
     complete: callback
