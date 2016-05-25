@@ -28,17 +28,19 @@ var config = {
 function guidGenerator () {
   function S4 (times, prefix) {
     var str = '';
-    var i;
+    var i = times || 1;
 
-    for (i = times || 1; i > 0; i--) {
+    for (i; i > 0; i--) {
       str += String (prefix);
-      str += parseInt (((Math.random () + 1) * 0x10000), 10) .toString (16) .substring (1);
+      str += parseInt (((Math.random () + 1) * 0x10000), 10)
+        .toString (16)
+        .substring (1);
     }
 
     return str;
   }
 
-  return (S4(2) + S4(4, '-') + S4(2));
+  return (S4 (2) + S4 (4, '-') + S4 (2));
 }
 
 
