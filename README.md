@@ -3,6 +3,7 @@ toonapp
 
 Unofficial node.js module to interact with Eneco Toon thermostat.
 
+[![npm](https://img.shields.io/npm/v/toonapp.svg?maxAge=2592000)](https://github.com/fvdm/nodejs-toonapp/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-toonapp.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-toonapp)
 [![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-toonapp.svg)](https://gemnasium.com/github.com/fvdm/nodejs-toonapp#runtime-dependencies)
 
