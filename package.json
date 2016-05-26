@@ -6,7 +6,7 @@
   },
   "name": "toonapp",
   "description": "Interact with Eneco Toon thermostat",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "repository": {
     "type": "git",
     "url": "git://github.com/fvdm/nodejs-toonapp.git"
