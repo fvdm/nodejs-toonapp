@@ -20,15 +20,14 @@
     "example.js"
   ],
   "scripts": {
-    "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
+    "test": "dotest"
   },
   "tonicExampleFilename": "example.js",
   "dependencies": {
     "httpreq": "^0.4.22"
   },
   "devDependencies": {
-    "dotest": "^1.11.0",
-    "eslint": "^3.0.0"
+    "dotest": "^1.13.0"
   },
   "optionalDependencies": {},
   "engines": {
