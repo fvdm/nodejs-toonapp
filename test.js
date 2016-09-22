@@ -34,11 +34,9 @@ dotest.add ('API access', function (test) {
 
     dotest.log ('warn', 'TOONAPP_USERNAME and/or TOONAPP_PASSWORD not set');
     dotest.log ('info', 'Using test endpoint with fake data');
-    test () .done ();
-  } else {
-    dotest.log ('good', 'API credentials are set');
-    test () .done ();
   }
+
+  test () .done ();
 });
 
 
