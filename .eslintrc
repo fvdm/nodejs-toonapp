@@ -59,6 +59,7 @@
     "no-alert": 2,
     "no-caller": 2,
     "no-catch-shadow": 2,
+    "no-console": 2,
     "no-delete-var": 2,
     "no-div-regex": 2,
     "no-duplicate-case": 2,
@@ -111,8 +112,8 @@
     "no-trailing-spaces": 2,
     "no-undef": 2,
     "no-undef-init": 2,
-    "no-undefined": 2,
-    "no-underscore-dangle": 2,
+    "no-undefined": 1,
+    "no-underscore-dangle": 1,
     "no-unexpected-multiline": 2,
     "no-unneeded-ternary": 2,
     "no-unreachable": 2,
@@ -137,7 +138,7 @@
     "quote-props": [2, "consistent"],
     "quotes": [2, "single", "avoid-escape"],
     "radix": 2,
-    "semi": 1,
+    "semi": 2,
     "semi-spacing": [2, {
       "before": false,
       "after": true
