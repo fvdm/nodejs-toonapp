@@ -1,6 +1,8 @@
 toonapp
 =======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-toonapp.svg)](https://greenkeeper.io/)
+
 Unofficial node.js module to interact with Eneco Toon thermostat.
 
 [![npm](https://img.shields.io/npm/v/toonapp.svg?maxAge=2592000)](https://github.com/fvdm/nodejs-toonapp/blob/master/CHANGELOG.md)
