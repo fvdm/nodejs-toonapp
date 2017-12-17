@@ -5,10 +5,10 @@ Unofficial node.js module to interact with Eneco Toon thermostat.
 
 [![npm](https://img.shields.io/npm/v/toonapp.svg?maxAge=2592000)](https://github.com/fvdm/nodejs-toonapp/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-toonapp.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-toonapp/branches)
-[![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-toonapp/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-toonapp?branch=master)
+[![Coverage](https://coveralls.io/repos/github/fvdm/nodejs-toonapp/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-toonapp?branch=master)
 [![Dependencies](https://www.bithound.io/github/fvdm/nodejs-toonapp/badges/master/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-toonapp/master/dependencies/npm)
 [![Code Quality](https://www.bithound.io/github/fvdm/nodejs-toonapp/badges/master/code.svg)](https://www.bithound.io/github/fvdm/nodejs-toonapp/master/files)
-[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-toonapp.svg)](https://greenkeeper.io/)
+[![Greenkeeper](https://badges.greenkeeper.io/fvdm/nodejs-toonapp.svg)](https://greenkeeper.io/)
 
 _Notice: this is not using the new official API, but instead the same endpoints as the iPhone app._
 
