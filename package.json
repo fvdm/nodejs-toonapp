@@ -24,7 +24,7 @@
   },
   "tonicExampleFilename": "example.js",
   "dependencies": {
-    "httpreq": "^0.4.22"
+    "httpreq": "^0.5.1"
   },
   "devDependencies": {
     "dotest": "^2.3.0"
